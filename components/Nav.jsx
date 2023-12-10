@@ -2,22 +2,23 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import {getProviders, signOut} from 'next-auth/react'
+import {getProviders, signOut, signIn, useSession} from 'next-auth/react'
 
 const Nav = () => {
-    const isUserLoggedIn = true;
+    // const isUserLoggedIn = true;
+    const {data: session } = useSession();
 
     const [providers, setProviders] = useState(null);
     const [toggleDropdown, settoggleDropdown] = useState(false)
 
     useEffect(() => {
-        const setProviders = async () =>{
+        const fetchProviders = async () =>{
             const response = await getProviders()
             
             //issue with the line below
             setProviders(response)
         }
-        setProviders();
+        fetchProviders();
     },[])
   return (
 
@@ -35,10 +36,10 @@ const Nav = () => {
         <p className="logo_text">Prompedia</p>
     </Link>
         Nav
-    
+    {/* {alert(providers)} */}
     {/* Bigger than Mobile */}
     <div className="sm:flex hidden">
-        {isUserLoggedIn ? (
+        {session?.user ? (
             <div className='flex gap-3 md:gap-5'>
                 <Link
                 href="/create-post"
@@ -81,7 +82,7 @@ const Nav = () => {
     {/* Mobile Navigation*/}
     
     <div className="sm:hidden flex  relative" >
-    {isUserLoggedIn ? (
+    {session?.user ? (
             <div className='flex'>
                     <Image src="/assets/images/logo.svg"
                     width={40}
@@ -113,7 +114,7 @@ const Nav = () => {
                                 settoggleDropdown(false);
                                 signOut();
                             }}
-                        ></button>
+                        >Sign Out</button>
                     </div>
                    )}
 
