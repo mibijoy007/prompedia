@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import {getProviders, signOut, signIn, useSession} from 'next-auth/react'
 
+
 const Nav = () => {
     // const isUserLoggedIn = true;
     const {data: session } = useSession();
@@ -52,8 +53,10 @@ const Nav = () => {
                 >
                     Sign Out
                 </button>
+               
                 <Link href='/profile'>
-                    <Image src="/assets/images/logo.svg"
+                    {/* <Image src="/assets/images/logo.svg" */}
+                    <Image src={session?.user.image}
                     width={40}
                     height={40}
                     className='rounded-full'
@@ -80,11 +83,15 @@ const Nav = () => {
     </div>
 
     {/* Mobile Navigation*/}
-    
+    {/* {console.log(session.user)} */}
     <div className="sm:hidden flex  relative" >
     {session?.user ? (
             <div className='flex'>
-                    <Image src="/assets/images/logo.svg"
+                    {/* <Image src="/assets/images/logo.svg" */}
+
+                {/* <Image src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" */}
+                <Image src={session?.user.image}
+                    
                     width={40}
                     height={40}
                     className='rounded-full'
