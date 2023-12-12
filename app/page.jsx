@@ -13,7 +13,7 @@ const Home = () => {
         <span className="orange_gradient">AI-Powered prompts</span>
         </h1>
         <p className="desc text-center">
-            Prompedia is an opensource prompting tool to find, share AI prompts & results
+            Prompedia is an opensource prompting tool to find, share AI prompts & results. 
         </p>
     </section>
     <Feed/>
